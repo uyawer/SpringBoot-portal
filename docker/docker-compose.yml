@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  postgresql:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    container_name: portal_postgresql
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: portaluser
+      POSTGRES_PASSWORD: portaluser0428
+      POSTGRES_DB: portal

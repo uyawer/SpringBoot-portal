@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{_common/layout::layout(~{::header/content()}, ~{::body/content()}, '従業員管理(編集)')}">
+<header>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">システム管理</li>
+      <li class="breadcrumb-item">従業員管理</li>
+      <li class="breadcrumb-item active" aria-current="page">編集</li>
+    </ol>
+  </nav>
+</header>
+<body>
+<div class="mx-auto fixed-width-md">
+  <form>
+    <div class="row mb-3">
+      <label for="numberInput" class="col-md-2 col-form-label d-flex align-items-center">社員番号</label>
+      <div class="col-md-auto">
+        <input type="text" class="form-control" id="numberInput" placeholder="社員番号" th:value="${screen.employee.number}" disabled>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="loginIdInput" class="col-md-2 col-form-label d-flex align-items-center">ログインID</label>
+      <div class="col-md-auto">
+        <input type="text" class="form-control" id="loginIdInput" placeholder="ログインID" th:value="${screen.employee.loginId}" disabled>
+      </div>
+    </div>
+    <div class="row g-3 mb-3">
+      <label for="lastNameInput" class="col-md-2 col-form-label d-flex align-items-center">名前</label>
+      <div class="col-md-5">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="lastNameInput" placeholder="姓" th:value="${screen.employee.lastName}">
+          <label for="lastNameInput">姓</label>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="firstNameInput" placeholder="名" th:value="${screen.employee.firstName}">
+          <label for="firstNameInput">名</label>
+        </div>
+      </div>
+    </div>
+    <div class="row g-3 mb-3">
+      <label for="lastNameKanaInput" class="col-md-2 col-form-label d-flex align-items-center">名前カナ</label>
+      <div class="col-md-5">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="lastNameKanaInput" placeholder="姓(カナ)" th:value="${screen.employee.lastNameKana}">
+          <label for="lastNameKanaInput">姓(カナ)</label>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="firstNameKanaInput" placeholder="名(カナ)" th:value="${screen.employee.firstNameKana}">
+          <label for="firstNameKanaInput">名(カナ)</label>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="birthdayInput" class="col-md-2 col-form-label d-flex align-items-center">生年月日</label>
+      <div class="col-md-auto">
+        <input type="text" class="form-control" id="birthdayInput" placeholder="生年月日" th:value="${screen.employee.birthday}">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="sexInput" class="col-md-2 col-form-label d-flex align-items-center">性別</label>
+      <div class="col-md-auto">
+        <input type="text" class="form-control" id="sexInput" placeholder="性別" th:value="${screen.employee.sex}">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="bloodInput" class="col-md-2 col-form-label d-flex align-items-center">血液型</label>
+      <div class="col-md-auto">
+        <input type="text" class="form-control" id="bloodInput" placeholder="血液型" th:value="${screen.employee.blood}">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="birthplaceInput" class="col-md-2 col-form-label d-flex align-items-center">出身地</label>
+      <div class="col-md-auto">
+        <input type="text" class="form-control" id="birthplaceInput" placeholder="出身地" th:value="${screen.employee.birthplace}">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="positionInput" class="col-md-2 col-form-label d-flex align-items-center">役職</label>
+      <div class="col-md-auto">
+        <input type="text" class="form-control" id="positionInput" placeholder="役職" th:value="${screen.employee.position}">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="departmentIdInput" class="col-md-2 col-form-label d-flex align-items-center">所属</label>
+      <div class="col-md-auto">
+        <input type="text" class="form-control" id="departmentIdInput" placeholder="所属" th:value="${screen.employee.departmentId}">
+      </div>
+    </div>
+  </form>
+  <div class="row mt-5 text-center">
+    <button type="button" class="col mx-5 btn btn-secondary">キャンセル</button>
+    <button type="button" class="col mx-5 btn btn-primary">更新</button>
+  </div>
+</div>
+</body>
+</html>

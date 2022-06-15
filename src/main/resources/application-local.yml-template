@@ -1,0 +1,5 @@
+# DataSource
+spring.datasource:
+  url: jdbc:postgresql://localhost:5432/portal
+  username: portaluser
+  password: portaluser0428

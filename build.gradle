@@ -1,0 +1,82 @@
+buildscript {
+	ext {
+		dockerComposePluginVersion = "0.15.0"
+	}
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath "com.avast.gradle:gradle-docker-compose-plugin:${dockerComposePluginVersion}"
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.7.0'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id "org.flywaydb.flyway" version "8.5.9"
+	id 'checkstyle'
+	id "groovy"
+}
+
+group = 'com.uyawer'
+version = '1.0.0'
+sourceCompatibility = '18'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		url 'https://repo.spring.io/milestone'
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'org.flywaydb:flyway-core:8.5.12'
+	implementation 'com.google.guava:guava:31.1-jre'
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
+	testImplementation 'org.codehaus.groovy:groovy-all:3.0.11'
+	testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+	testImplementation 'org.spockframework:spock-spring:2.1-groovy-3.0'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+flyway {
+	url = 'jdbc:postgresql://localhost:5432/portal'
+	user = 'portaluser'
+	password = 'portaluser0428'
+}
+
+apply plugin: "docker-compose"
+dockerCompose {
+	useComposeFiles = ["docker/docker-compose.yml"]
+}
+
+checkstyle {
+	toolVersion '10.3'
+	configFile file('./config/google_checks.xml')
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{_common/layout::layout(~{::header/content()}, ~{::body/content()}, 'グループ管理')}">
+<header>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">システム管理</li>
+      <li class="breadcrumb-item active" aria-current="page">グループ管理</li>
+    </ol>
+  </nav>
+</header>
+<body>
+<div>
+  <div>
+    <span th:text="${screen.message}"></span>
+  </div>
+  <span class="badge bg-primary">Primary</span>
+  <span class="badge bg-secondary">Secondary</span>
+  <span class="badge bg-success">Success</span>
+  <span class="badge bg-danger">Danger</span>
+  <span class="badge bg-warning text-dark">Warning</span>
+  <span class="badge bg-info text-dark">Info</span>
+  <span class="badge bg-light text-dark">Light</span>
+  <span class="badge bg-dark">Dark</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(header, body, title)" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+  <link th:href="@{/css/bootstrap-grid.css}" rel="stylesheet">
+  <link th:href="@{/css/bootstrap-reboot.css}" rel="stylesheet">
+  <link th:href="@{/css/bootstrap-utilities.css}" rel="stylesheet">
+  <link th:href="@{/css/layout.css}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/9d520879bb.js" crossorigin="anonymous"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+  <title th:text="${title} + ' - portal'"></title>
+</head>
+<body>
+<div th:replace="~{_common/header::layout-header}"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div th:replace="~{_common/sidebar::layout-sidebar}"></div>
+    <main class="col py-4 px-md-4">
+      <div id="main" th:replace="${body}">body</div>
+    </main>
+    <script th:src="@{/js/bootstrap.bundle.js}"></script>
+  </div>
+</div>
+</body>
+<script>
+  $(function () {
+    // ajaxでURLを叩くために必要なtokenの設定
+    let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function (e, xhr, options) {
+      xhr.setRequestHeader(header, token);
+    });
+  });
+</script>
+</html>

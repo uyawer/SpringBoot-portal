@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+/**************************
+  個別カスタマイズ用CSS
+**************************/
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Noto Sans JP',
+  'Helvetica Neue',
+  'Helvetica',
+  'Hiragino Sans',
+  'Hiragino Kaku Gothic ProN',
+  'Arial',
+  'Yu Gothic',
+  'Meiryo',
+  sans-serif;
+}
+
+main {
+  margin-left: 16rem;
+  max-width: calc(100vw - 16rem);
+}
+
+#sidebarMenu {
+  margin-top: 3rem;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+.fixed-width-md {
+  max-width: 768px;
+}
+
+/**************************
+  bootstrap CSS カスタマイズ
+**************************/
+/*
+ * Sidebar
+ */
+.sidebar {
+  min-width: 16rem;
+  max-width: 16rem;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 5rem;
+  }
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  font-weight: 500;
+  color: #333333;
+}
+
+.sidebar .nav-link i {
+  width: 24px;
+  text-align: center;
+}
+
+.sidebar .nav-link.active {
+  color: #2470dc;
+}
+
+.sidebar .nav-link.accordion-button i {
+  margin-left: -0.3rem;
+}
+
+.sidebar .nav-link.accordion-button span {
+
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+/*
+ * Navbar
+ */
+.navbar-brand {
+  min-width: 16rem;
+  max-width: 16rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, .25);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .navbar-toggler {
+  top: .25rem;
+  right: 1rem;
+}
+
+.navbar .form-control {
+  padding: .75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+.form-control-dark {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+/*
+ * breadcrumb
+ */
+.breadcrumb {
+  margin-left: 0.8rem;
+  margin-bottom: 0;
+}
+
+.breadcrumb-item,
+.breadcrumb-item.active {
+  color: #fefefe;
+  font-weight: 500;
+}
+
+/**
+ * form
+ */
+.form-floating > label {
+  color: #6c757d;
+  opacity: 1;
+}

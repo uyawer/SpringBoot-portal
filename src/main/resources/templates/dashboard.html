@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+  th:replace="~{_common/layout::layout(~{::header/content()}, ~{::body/content()}, 'トップ')}">
+<header>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">トップ</li>
+    </ol>
+  </nav>
+</header>
+<body>
+<div>
+  <div>
+    <span sec:authentication="principal.fullName"></span>さん
+    <span th:text="${screen.message}"></span>
+  </div>
+  <span class="badge bg-primary">Primary</span>
+  <span class="badge bg-secondary">Secondary</span>
+  <span class="badge bg-success">Success</span>
+  <span class="badge bg-danger">Danger</span>
+  <span class="badge bg-warning text-dark">Warning</span>
+  <span class="badge bg-info text-dark">Info</span>
+  <span class="badge bg-light text-dark">Light</span>
+  <span class="badge bg-dark">Dark</span>
+</div>
+</body>
+</html>

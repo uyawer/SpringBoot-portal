@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+  <link th:href="@{/css/bootstrap-grid.css}" rel="stylesheet">
+  <link th:href="@{/css/bootstrap-reboot.css}" rel="stylesheet">
+  <link th:href="@{/css/bootstrap-utilities.css}" rel="stylesheet">
+  <link th:href="@{/css/layout.css}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/9d520879bb.js" crossorigin="anonymous"></script>
+  <title>ログイン - portal</title>
+  <style>
+    html, body {
+      background-image: url('https://getwallpapers.com/wallpaper/full/c/d/c/369471.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 100%;
+    }
+
+    .container {
+      height: 100%;
+      align-content: center;
+    }
+
+    .card {
+      height: 256px;
+      width: 400px;
+      margin-top: auto;
+      margin-bottom: auto;
+      padding-top: 1rem;
+      background-color: rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .social_icon span {
+      font-size: 60px;
+      margin-left: 10px;
+      color: #6db944;
+    }
+
+    .social_icon span:hover {
+      color: white;
+      cursor: pointer;
+    }
+
+    .card-header h3 {
+      color: white;
+    }
+
+    .social_icon {
+      position: absolute;
+      right: 20px;
+      top: -45px;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+    }
+
+    .input-group-prepend span {
+      width: 50px;
+      height: 2.4em;
+      background-color: #6db944;
+      color: black;
+      border: 0 !important;
+    }
+
+    input:focus {
+      outline: 0 !important;
+      box-shadow: 0 0 0 0 !important;
+
+    }
+
+    .remember input {
+      width: 20px;
+      height: 20px;
+      margin-left: 15px;
+      margin-right: 5px;
+    }
+
+    .login_btn {
+      color: black;
+      background-color: #6db944;
+      width: 100px;
+    }
+
+    .login_btn:hover {
+      color: black;
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="d-flex justify-content-center h-100">
+    <div class="card">
+      <!--
+      <div class="card-header">
+        <h3></h3>
+        <div class="d-flex justify-content-end social_icon">
+          <span><i class="fab fa-facebook-square"></i></span>
+          <span><i class="fab fa-google-plus-square"></i></span>
+          <span><i class="fab fa-twitter-square"></i></span>
+        </div>
+      </div>
+      -->
+      <div class="card-body">
+        <form th:action="@{/login}" method="post">
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <label for="loginIdInput">
+                <span class="input-group-text">
+                  <i class="fa fa-user fa-lg"></i>
+                </span>
+              </label>
+            </div>
+            <input type="text" class="form-control" placeholder="ログインID" id="loginIdInput" name="loginId">
+          </div>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <label for="passwordInput">
+                <span class="input-group-text">
+                  <i class="fa fa-key fa-lg"></i>
+                </span>
+              </label>
+            </div>
+            <input type="password" class="form-control" placeholder="パスワード" id="passwordInput" name="password">
+          </div>
+          <div class="form-group pt-3">
+            <input type="submit" value="Login" class="btn float-right login_btn w-100">
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="d-flex  justify-content-center text-white">
+          パスワードを忘れた方は<a href="#" style="color: greenyellow;">こちら</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

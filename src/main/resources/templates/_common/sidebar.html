@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="ja">
+<nav id="sidebarMenu" class="col d-md-block bg-light sidebar collapse" th:fragment="layout-sidebar">
+  <div class="position-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" id="top" href="/">
+          <i class="fa-solid fa-house"></i>
+          <span>トップ</span>
+        </a>
+      </li>
+      <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+        <div class="accordion" id="accordion-system-manage">
+          <div class="accordion-item">
+            <div class="accordion-header" id="heading-system-manage">
+              <button
+                class="nav-link accordion-button bg-light collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse-system-manage"
+                aria-expanded="false"
+                aria-controls="collapse-system-manage">
+                <i class="fa-solid fa-gear"></i>
+                <span>システム管理</span>
+              </button>
+            </div>
+            <div
+              id="collapse-system-manage"
+              class="accordion-collapse collapse"
+              aria-labelledby="heading-system-manage"
+              data-bs-parent="#accordion-system-manage">
+              <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin/manage/departments">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>グループ管理</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin/manage/employees">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span>従業員管理</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>○○関連</span>
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">
+          <span data-feather="file-text"></span>
+          ○○
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">
+          <span data-feather="file-text"></span>
+          △△
+        </a>
+      </li>
+    </ul>
+  </div>
+  <script>
+    $(function () {
+      let top = $('#top')[0];
+      // 表示している画面のメニューを開いておく
+      if (location.href.includes('/admin/manage')) {
+        $('#heading-system-manage button').attr('aria-expanded', 'true').removeClass('collapsed')
+        $('#collapse-system-manage').addClass('show')
+      }
+      // 表示している画面のメニューにハイライトを付ける
+      $('#sidebarMenu a').filter(function () {
+        // トップだけはrootで全て部分一致してしまうので別枠で判定させる
+        if (this.href === top.href) {
+          return location.href === top.href;
+        }
+        return location.href.includes(this.href)
+      }).addClass('active').siblings().removeClass('active')
+    })
+  </script>
+</nav>
+</html>
