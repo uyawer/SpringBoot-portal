@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="_csrf" th:content="${_csrf.token}"/>
   <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-  <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
-  <link rel="stylesheet" th:href="@{/css/bootstrap-grid.css}">
-  <link rel="stylesheet" th:href="@{/css/bootstrap-reboot.css}">
-  <link rel="stylesheet" th:href="@{/css/bootstrap-utilities.css}">
+  <link
+    rel="stylesheet"
+    crossorigin="anonymous"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" th:href="@{/css/layout.css}">
   <script crossorigin="anonymous" src="https://kit.fontawesome.com/9d520879bb.js"></script>
   <script
@@ -24,18 +25,22 @@
     <main class="col py-4 px-md-4">
       <div id="main" th:replace="${body}">body</div>
     </main>
-    <script th:src="@{/js/bootstrap.bundle.js}"></script>
+    <script
+      crossorigin="anonymous"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script>
+      $(function () {
+        // ajaxでURLを叩くために必要なtokenの設定
+        let token = $("meta[name='_csrf']").attr("content");
+        let header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function (e, xhr, options) {
+          xhr.setRequestHeader(header, token);
+        });
+      });
+    </script>
   </div>
 </div>
 </body>
-<script>
-  $(function () {
-    // ajaxでURLを叩くために必要なtokenの設定
-    let token = $("meta[name='_csrf']").attr("content");
-    let header = $("meta[name='_csrf_header']").attr("content");
-    $(document).ajaxSend(function (e, xhr, options) {
-      xhr.setRequestHeader(header, token);
-    });
-  });
-</script>
 </html>
