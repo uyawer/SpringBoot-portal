@@ -18,6 +18,7 @@ plugins {
 	id "org.flywaydb.flyway" version "8.5.9"
 	id 'checkstyle'
 	id "groovy"
+	id "com.github.spotbugs" version "4.8.0"
 }
 
 group = 'com.uyawer'
@@ -63,6 +64,7 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+	checkstyleMain
 }
 
 flyway {
@@ -79,4 +81,18 @@ dockerCompose {
 checkstyle {
 	toolVersion '10.3'
 	configFile file('./config/google_checks.xml')
+}
+
+spotbugsMain {
+	reports {
+		html {
+			required = true
+			outputLocation = file("$buildDir/reports/spotbugs/main/spotbugs.html")
+			stylesheet = 'fancy-hist.xsl'
+		}
+	}
+}
+
+spotbugs {
+	reportLevel = 'high'
 }
