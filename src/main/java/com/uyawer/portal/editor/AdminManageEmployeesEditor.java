@@ -6,14 +6,13 @@ import com.uyawer.portal.model.screen.AdminManageEmployeeEditScreen;
 import com.uyawer.portal.model.screen.AdminManageEmployeeListScreen;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AdminManageEmployeesEditor {
 
     public static AdminManageEmployeeListScreen convertListScreen(List<EmployeeEntity> entityList) {
         List<EmployeeDto> dtoList = entityList.stream()
             .map(EmployeeDto::new)
-            .collect(Collectors.toList());
+            .toList();
 
         AdminManageEmployeeListScreen screen = new AdminManageEmployeeListScreen();
         screen.setEmployeeList(dtoList);
