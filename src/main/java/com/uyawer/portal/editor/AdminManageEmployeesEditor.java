@@ -1,17 +1,19 @@
 package com.uyawer.portal.editor;
 
-import java.util.List;
-
 import com.uyawer.portal.model.dto.EmployeeDto;
 import com.uyawer.portal.model.entity.EmployeeEntity;
 import com.uyawer.portal.model.screen.AdminManageEmployeeEditScreen;
 import com.uyawer.portal.model.screen.AdminManageEmployeeListScreen;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class AdminManageEmployeesEditor {
 
     public static AdminManageEmployeeListScreen convertListScreen(List<EmployeeEntity> entityList) {
         List<EmployeeDto> dtoList = entityList.stream()
-            .map(EmployeeDto::new).toList();
+            .map(EmployeeDto::new)
+            .collect(Collectors.toList());
 
         AdminManageEmployeeListScreen screen = new AdminManageEmployeeListScreen();
         screen.setEmployeeList(dtoList);

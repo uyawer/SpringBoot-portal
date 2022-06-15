@@ -1,5 +1,12 @@
 package com.uyawer.portal.service;
 
+import com.uyawer.portal.constants.type.RoleType;
+import com.uyawer.portal.model.dto.LoginUserDto;
+import com.uyawer.portal.model.entity.EmployeeEntity;
+import com.uyawer.portal.model.entity.RoleEntity;
+import com.uyawer.portal.repository.EmployeesRepository;
+import com.uyawer.portal.repository.RolesRepository;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,13 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-
-import com.uyawer.portal.constants.type.RoleType;
-import com.uyawer.portal.model.dto.LoginUserDto;
-import com.uyawer.portal.model.entity.EmployeeEntity;
-import com.uyawer.portal.model.entity.RoleEntity;
-import com.uyawer.portal.repository.EmployeesRepository;
-import com.uyawer.portal.repository.RolesRepository;
 
 @Service
 public class LoginUserDetailsService implements UserDetailsService {

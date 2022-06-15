@@ -1,13 +1,13 @@
 package com.uyawer.portal.controller;
 
+import com.uyawer.portal.constants.Page;
+import com.uyawer.portal.editor.DashboardEditor;
+import com.uyawer.portal.model.screen.DashboardScreen;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.uyawer.portal.constants.Page;
-import com.uyawer.portal.editor.DashboardEditor;
-import com.uyawer.portal.model.screen.DashboardScreen;
 
 @Controller
 @RequestMapping(path = {"/"})

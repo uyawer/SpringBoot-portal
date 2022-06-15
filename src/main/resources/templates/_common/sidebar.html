@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="ja">
-<nav id="sidebarMenu" class="col d-md-block bg-light sidebar collapse" th:fragment="layout-sidebar">
+<html lang="ja" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
+<nav class="col d-md-block bg-light sidebar collapse" id="sidebarMenu" th:fragment="layout-sidebar">
   <div class="position-sticky pt-3">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" id="top" href="/">
+        <a class="nav-link" href="/" id="top">
           <i class="fa-solid fa-house"></i>
           <span>トップ</span>
         </a>
@@ -14,21 +14,21 @@
           <div class="accordion-item">
             <div class="accordion-header" id="heading-system-manage">
               <button
-                class="nav-link accordion-button bg-light collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapse-system-manage"
+                aria-controls="collapse-system-manage"
                 aria-expanded="false"
-                aria-controls="collapse-system-manage">
+                class="nav-link accordion-button bg-light collapsed"
+                data-bs-target="#collapse-system-manage"
+                data-bs-toggle="collapse"
+                type="button">
                 <i class="fa-solid fa-gear"></i>
                 <span>システム管理</span>
               </button>
             </div>
             <div
-              id="collapse-system-manage"
-              class="accordion-collapse collapse"
               aria-labelledby="heading-system-manage"
-              data-bs-parent="#accordion-system-manage">
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordion-system-manage"
+              id="collapse-system-manage">
               <ul class="nav flex-column mb-2">
                 <li class="nav-item">
                   <a class="nav-link" href="/admin/manage/departments">

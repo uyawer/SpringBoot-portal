@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
-  th:replace="~{_common/layout::layout(~{::header/content()}, ~{::body/content()}, 'トップ')}">
+<html th:replace="~{_common/layout::layout(~{::header/content()}, ~{::body/content()}, 'トップ')}" xmlns:sec="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
 <header>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">トップ</li>
+      <li aria-current="page" class="breadcrumb-item active">トップ</li>
     </ol>
   </nav>
 </header>

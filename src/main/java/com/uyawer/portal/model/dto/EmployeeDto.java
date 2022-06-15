@@ -1,10 +1,9 @@
 package com.uyawer.portal.model.dto;
 
-import java.time.LocalDate;
-
 import com.uyawer.portal.model.entity.EmployeeEntity;
 
-import lombok.AllArgsConstructor;
+import java.time.LocalDate;
+
 import lombok.Data;
 
 @Data

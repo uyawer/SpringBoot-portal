@@ -1,5 +1,8 @@
 package com.uyawer.portal.security;
 
+import com.uyawer.portal.constants.type.RoleType;
+import com.uyawer.portal.service.LoginUserDetailsService;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.SecurityExpressionHandler;
@@ -12,9 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
-
-import com.uyawer.portal.constants.type.RoleType;
-import com.uyawer.portal.service.LoginUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -77,6 +77,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**
      * 権限の優劣の設定を作成
+     *
      * @return 権限の優劣がまとまっているオブジェクト
      */
     private SecurityExpressionHandler<FilterInvocation> createSecurityExpressionHandler() {

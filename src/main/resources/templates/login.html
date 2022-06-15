@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
-  <link th:href="@{/css/bootstrap-grid.css}" rel="stylesheet">
-  <link th:href="@{/css/bootstrap-reboot.css}" rel="stylesheet">
-  <link th:href="@{/css/bootstrap-utilities.css}" rel="stylesheet">
-  <link th:href="@{/css/layout.css}" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/9d520879bb.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+  <link rel="stylesheet" th:href="@{/css/bootstrap-grid.css}">
+  <link rel="stylesheet" th:href="@{/css/bootstrap-reboot.css}">
+  <link rel="stylesheet" th:href="@{/css/bootstrap-utilities.css}">
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <script crossorigin="anonymous" src="https://kit.fontawesome.com/9d520879bb.js"></script>
   <title>ログイン - portal</title>
   <style>
     html, body {
@@ -105,7 +105,7 @@
       </div>
       -->
       <div class="card-body">
-        <form th:action="@{/login}" method="post">
+        <form method="post" th:action="@{/login}">
           <div class="input-group form-group">
             <div class="input-group-prepend">
               <label for="loginIdInput">
@@ -114,7 +114,7 @@
                 </span>
               </label>
             </div>
-            <input type="text" class="form-control" placeholder="ログインID" id="loginIdInput" name="loginId">
+            <input class="form-control" id="loginIdInput" name="loginId" placeholder="ログインID" type="text">
           </div>
           <div class="input-group form-group">
             <div class="input-group-prepend">
@@ -124,10 +124,10 @@
                 </span>
               </label>
             </div>
-            <input type="password" class="form-control" placeholder="パスワード" id="passwordInput" name="password">
+            <input class="form-control" id="passwordInput" name="password" placeholder="パスワード" type="password">
           </div>
           <div class="form-group pt-3">
-            <input type="submit" value="Login" class="btn float-right login_btn w-100">
+            <input class="btn float-right login_btn w-100" type="submit" value="Login">
           </div>
         </form>
       </div>

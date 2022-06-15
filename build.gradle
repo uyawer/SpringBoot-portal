@@ -22,7 +22,7 @@ plugins {
 
 group = 'com.uyawer'
 version = '1.0.0'
-sourceCompatibility = '18'
+sourceCompatibility = '11'
 
 configurations {
 	compileOnly {

@@ -4,13 +4,13 @@
     portal
   </a>
   <button
-    class="navbar-toggler position-absolute d-md-none collapsed"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#sidebarMenu"
     aria-controls="sidebarMenu"
     aria-expanded="false"
-    aria-label="Toggle navigation">
+    aria-label="Toggle navigation"
+    class="navbar-toggler position-absolute d-md-none collapsed"
+    data-bs-target="#sidebarMenu"
+    data-bs-toggle="collapse"
+    type="button">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="d-flex justify-content-start flex-wrap flex-md-nowrap align-items-center w-100">
@@ -18,7 +18,7 @@
   </div>
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <form name="logout" th:action="@{/logout}" method="post">
+      <form method="post" name="logout" th:action="@{/logout}">
         <a class="nav-link px-3" href="javascript:logout.submit()">
           <i class="fa-solid fa-right-from-bracket fa-xl"></i>
         </a>

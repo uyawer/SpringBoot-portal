@@ -1,12 +1,13 @@
 package com.uyawer.portal.model.dto;
 
+import com.uyawer.portal.model.entity.EmployeeEntity;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDate;
 import java.util.Collection;
 
-import com.uyawer.portal.model.entity.EmployeeEntity;
 import lombok.Getter;
 
 @Getter
