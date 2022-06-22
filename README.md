@@ -41,9 +41,16 @@
 
 ## 開発環境構築手順
 
-### docker-compose.yml
+### docker-compose
 
 リソース以外の環境はDockerを用いて準備します。
+Dockerのインストール手順については省略します。
+
+PowerShellなどからDockerに新しいvolumeを作成します。
+
+```ps1
+docker volume create --name portal-db-volume -d local
+```
 
 gradleから`composeUp`を実行します。
 
