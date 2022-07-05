@@ -1,4 +1,8 @@
-package com.uyawer.portal.service;
+/*!
+ * Copyright © 2022 uyawer. All rights Reserved.
+ */
+
+package com.uyawer.portal.service.impl;
 
 import com.uyawer.portal.constants.type.RoleType;
 import com.uyawer.portal.model.dto.LoginUserDto;
@@ -16,15 +20,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
-public class LoginUserDetailsService implements UserDetailsService {
+public class LoginUserDetailsServiceImpl implements UserDetailsService {
 
     private final EmployeesRepository employeesRepository;
 
     private final RolesRepository rolesRepository;
 
-    public LoginUserDetailsService(EmployeesRepository employeesRepository, RolesRepository rolesRepository) {
+    public LoginUserDetailsServiceImpl(EmployeesRepository employeesRepository, RolesRepository rolesRepository) {
         this.employeesRepository = employeesRepository;
         this.rolesRepository = rolesRepository;
     }
@@ -32,18 +37,20 @@ public class LoginUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         // 従業員情報を取得
-        EmployeeEntity employee = employeesRepository.findByLoginId(userName)
-            .orElseThrow(() -> {
-                throw new UsernameNotFoundException("No user matching the login ID was found. {loginId: " + userName + "}");
-            });
+        Optional<EmployeeEntity> employeeOptional = employeesRepository.findByLoginId(userName);
+        if (employeeOptional.isEmpty()) {
+            throw new UsernameNotFoundException("No user matching the login ID was found. {loginId: " + userName + "}");
+        }
 
         // 権限情報を取得
-        RoleEntity role = rolesRepository.findById(employee.getRoleId())
-            .orElseThrow(() -> {
-                throw new UsernameNotFoundException("Authorization information not found. {employee: " + employee + "}");
-            });
+        EmployeeEntity employee = employeeOptional.get();
+        Optional<RoleEntity> roleOptional = rolesRepository.findById(employee.getRoleId());
+        if (roleOptional.isEmpty()) {
+            throw new UsernameNotFoundException("Authorization information not found. {employee: " + employee + "}");
+        }
 
         // 権限のリスト
+        RoleEntity role = roleOptional.get();
         Collection<GrantedAuthority> authorityList = AuthorityUtils.createAuthorityList(RoleType.GUEST.getRoleName());
         if (role.isGeneralFlg()) {
             authorityList.add(new SimpleGrantedAuthority(RoleType.GENERAL.getRoleName()));

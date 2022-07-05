@@ -9,6 +9,12 @@
           <span>トップ</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/general/employees">
+          <i class="fa-solid fa-user"></i>
+          <span>従業員一覧</span>
+        </a>
+      </li>
       <li class="nav-item" sec:authorize="hasRole('ADMIN')">
         <div class="accordion" id="accordion-system-manage">
           <div class="accordion-item">
@@ -49,7 +55,7 @@
       </li>
     </ul>
 
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+    <h6 class="sidebar-heading d-flex justify-content-start align-items-center px-3 mt-4 mb-1 text-muted">
       <span>○○関連</span>
     </h6>
     <ul class="nav flex-column mb-2">
@@ -66,8 +72,17 @@
         </a>
       </li>
     </ul>
+
+    <ul class="nav flex-column d-md-none mt-4 mb-1">
+      <li class="nav-item">
+        <a class="nav-link px-3 text-end" href="javascript:logout.submit()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>ログアウト</span>
+        </a>
+      </li>
+    </ul>
   </div>
-  <script>
+  <script type="text/javascript" th:inline="javascript">
     $(function () {
       let top = $('#top')[0];
       // 表示している画面のメニューを開いておく

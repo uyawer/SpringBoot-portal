@@ -5,11 +5,9 @@
 package com.uyawer.portal.controller;
 
 import com.uyawer.portal.constants.Page;
-import com.uyawer.portal.constants.type.BloodType;
-import com.uyawer.portal.constants.type.GenderType;
 import com.uyawer.portal.helper.EmployeesHelper;
 import com.uyawer.portal.model.entity.EmployeeEntity;
-import com.uyawer.portal.service.EmployeeService;
+import com.uyawer.portal.repository.EmployeesRepository;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,30 +16,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping(path = {"/admin/manage/employees"})
-public class AdminManageEmployeeController {
+@RequestMapping(path = {"/general/employees"})
+public class GeneralEmployeeController {
 
-    private final EmployeeService employeeService;
+    private final EmployeesRepository employeesRepository;
 
-    public AdminManageEmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public GeneralEmployeeController(EmployeesRepository employeesRepository) {
+        this.employeesRepository = employeesRepository;
     }
 
     @Transactional(readOnly = true)
     @GetMapping
     public ModelAndView get() {
         // 全ての従業員情報を取得
-        List<EmployeeEntity> entityList = employeeService.findAll();
+        List<EmployeeEntity> entityList = employeesRepository.findByDeleteFlgFalseOrderById();
         // 画面表示
-        return new ModelAndView(Page.ADMIN_MANAGE_EMPLOYEES)
-            .addObject("genderTypeList", Stream.of(GenderType.values()).toList())
-            .addObject("bloodTypeList", Stream.of(BloodType.values()).toList())
+        return new ModelAndView(Page.GENERAL_EMPLOYEES)
             .addObject("employeeList", EmployeesHelper.convertDtoList(entityList));
     }
 }

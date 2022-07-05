@@ -4,4 +4,4 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'SpringBoot-v2.7.0-portal'
+rootProject.name = 'portal'

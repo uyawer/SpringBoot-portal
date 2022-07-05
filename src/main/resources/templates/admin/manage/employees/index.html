@@ -9,73 +9,544 @@
   </nav>
 </header>
 <body>
-<div>
-  <div class="row g-4">
-    <div class="col" style="max-width: 14rem; min-width: 14rem" th:each="employee : ${screen.employeeList}" th:object="${employee}">
-      <div class="card h-100 shadow">
-        <div class="card-body">
-          <div th:text="*{number}"></div>
-          <div th:text="*{fullName}"></div>
-          <div th:text="*{loginId + '@example.com'}"></div>
-        </div>
-        <div class="card-footer text-end">
-          <a class="btn btn-secondary" th:href="@{/admin/manage/employees/{id}(id=*{id})}">
-            <i class="fa-solid fa-pen-to-square"></i>
-          </a>
-          <a class="btn btn-danger" data-bs-target="#deleteConfirmModal" data-bs-toggle="modal"
-            th:data-delete-full-name="*{fullName}" th:data-delete-id="*{id}" th:data-delete-number="*{number}">
-            <i class="fa-solid fa-trash"></i>
-          </a>
-        </div>
-      </div>
-    </div>
+<div class="row mb-3">
+  <div class="col-md text-end">
+    <a class="btn btn-primary" data-bs-target="#add-modal" data-bs-toggle="modal">
+      <i class="fa-solid fa-plus"></i>新規登録
+    </a>
+    <a class="btn btn-danger" data-bs-target="#add-modal" data-bs-toggle="modal">
+      <i class="fa-solid fa-trash"></i>選択削除
+    </a>
   </div>
-  <!-- 削除確認モーダル -->
-  <div aria-hidden="true" aria-labelledby="deleteConfirmModalLabel" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="deleteConfirmModal"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteConfirmModalLabel">削除確認</h5>
-          <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-        </div>
-        <div class="modal-body">
-          以下の従業員情報を削除します。
-          <div class="row mt-3 mx-auto">
-            <div class="col-5 fw-bold text-end">社員番号</div>
-            <div class="col-7" id="deleteEmployeeNumber"></div>
+</div>
+<div class="table-responsive main-content-responsive">
+  <table class="table table-hover text-nowrap">
+    <thead>
+    <tr>
+      <th scope="col" class="align-middle text-end" style="width: 4rem; min-width: 4rem;">ID</th>
+      <th scope="col" class="align-middle" style="min-width: 5rem;">社員番号</th>
+      <th scope="col" class="align-middle" style="min-width: 7rem;">名字</th>
+      <th scope="col" class="align-middle" style="min-width: 7rem;">名前</th>
+      <th scope="col" class="align-middle" style="min-width: 3.5rem;">年齢</th>
+      <th scope="col" class="align-middle" style="min-width: 3.5rem;">性別</th>
+      <th scope="col" class="align-middle" style="min-width: 4rem;">血液型</th>
+      <th scope="col" class="align-middle" style="min-width: 7.5rem;"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employeeList}" th:object="${employee}">
+      <th class="align-middle text-end" th:text="*{id}" scope="row"></th>
+      <td class="align-middle" th:text="*{number}"></td>
+      <td class="align-middle" th:text="*{lastName}"></td>
+      <td class="align-middle" th:text="*{firstName}"></td>
+      <td class="align-middle" th:text="*{ageLabel}"></td>
+      <td class="align-middle" th:text="*{genderTypeLabel}"></td>
+      <td class="align-middle" th:text="*{bloodTypeLabel}"></td>
+      <td class="align-middle text-end">
+        <a class="btn btn-secondary" data-bs-target="#edit-modal" data-bs-toggle="modal" th:data-edit-id="*{id}">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </a>
+        <a class="btn btn-danger" data-bs-target="#delete-confirm-modal" data-bs-toggle="modal"
+          th:data-delete-full-name="*{fullName}" th:data-delete-id="*{id}" th:data-delete-number="*{number}">
+          <i class="fa-solid fa-trash"></i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 新規登録モーダル -->
+<div aria-hidden="true" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="add-modal" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">新規登録</h5>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row needs-validation" novalidate>
+          <input id="add-id-input" type="hidden">
+          <div class="row mb-3">
+            <div class="col-md-2">
+              <label class="form-label" for="add-number-input">社員番号</label>
+              <input class="form-control" id="add-number-input" placeholder="社員番号" type="text" required>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label" for="add-loginId-input">ログインID</label>
+              <input class="form-control" id="add-loginId-input" placeholder="ログインID" type="text" required>
+            </div>
           </div>
-          <div class="row mt-2 mx-auto">
-            <div class="col-5 fw-bold text-end">名前</div>
-            <div class="col-7" id="deleteEmployeeFullName"></div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label" for="add-lastName-input">名字</label>
+              <input class="form-control" id="add-lastName-input" placeholder="名字" type="text" required>
+              <div class="invalid-feedback" id="add-lastName-input-error"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="add-firstName-input">名前</label>
+              <input class="form-control" id="add-firstName-input" placeholder="名前" type="text" required>
+              <div class="invalid-feedback" id="add-firstName-input-error"></div>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">キャンセル</button>
-          <form th:action="@{/admin/manage/employees}" th:method="delete" th:object="${deleteForm}">
-            <input id="deleteEmployeeId" name="deleteEmployeeId" type="hidden">
-            <button class="btn btn-danger" type="submit">
-              <i class="fa-solid fa-trash"></i>削除
-            </button>
-          </form>
-        </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label" for="add-lastNameKana-input">名字(カナ)</label>
+              <input class="form-control" id="add-lastNameKana-input" placeholder="名字(カナ)" type="text" required>
+              <div class="invalid-feedback" id="add-lastNameKana-input-error"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="add-firstNameKana-input">名前(カナ)</label>
+              <input class="form-control" id="add-firstNameKana-input" placeholder="名前(カナ)" type="text" required>
+              <div class="invalid-feedback" id="add-firstNameKana-input-error"></div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-3">
+              <label class="form-label" for="add-birthday-input">生年月日</label>
+              <input class="form-control" id="add-birthday-input" placeholder="生年月日" type="text">
+              <div class="invalid-feedback" id="add-birthday-input-error"></div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label" for="add-gender-input">性別</label>
+              <select class="form-select" id="add-gender-input" required>
+                <option value="">未選択</option>
+                <option th:each="gender : ${genderTypeList}" th:value="${gender.value}" th:inline="text">[[${gender.label}]]</option>
+              </select>
+              <div class="invalid-feedback" id="add-gender-input-error"></div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label" for="add-blood-input">血液型</label>
+              <select class="form-select" id="add-blood-input" required>
+                <option value="">未選択</option>
+                <option th:each="blood : ${bloodTypeList}" th:value="${blood.value}" th:inline="text">[[${blood.label}]]</option>
+              </select>
+              <div class="invalid-feedback" id="add-blood-input-error"></div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label" for="add-birthplace-input">出身地</label>
+              <select class="form-select" id="add-birthplace-input" required>
+                <option value="">未選択</option>
+                <option value="0">徳島県</option>
+                <option value="1">香川県</option>
+                <option value="2">愛媛県</option>
+                <option value="3">高知県</option>
+              </select>
+              <div class="invalid-feedback" id="add-birthplace-input-error"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">キャンセル</button>
+        <button class="btn btn-primary" type="submit" id="add-button">登録</button>
       </div>
     </div>
   </div>
 </div>
-<script>
-  // 削除モーダル表示時の処理
-  $('#deleteConfirmModal').on('show.bs.modal', function (event) {
-    // 値を取得
-    let button = $(event.relatedTarget);
-    let id = button.data('delete-id');
-    let number = button.data('delete-number');
-    let fullName = button.data('delete-full-name');
-    // モーダル側に値を設定
-    $('#deleteEmployeeId').val(id)
-    $('#deleteEmployeeNumber').text(number)
-    $('#deleteEmployeeFullName').text(fullName)
+
+<!-- 編集モーダル -->
+<div aria-hidden="true" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="edit-modal" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">編集</h5>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row needs-validation" novalidate>
+          <input id="edit-id-input" type="hidden">
+          <div class="row mb-3">
+            <div class="col-md-2">
+              <label class="form-label" for="edit-number-input">社員番号</label>
+              <input class="form-control" id="edit-number-input" placeholder="社員番号" type="text" disabled required>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label" for="edit-loginId-input">ログインID</label>
+              <input class="form-control" id="edit-loginId-input" placeholder="ログインID" type="text" disabled required>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label" for="edit-lastName-input">名字</label>
+              <input class="form-control" id="edit-lastName-input" placeholder="名字" type="text" required>
+              <div class="invalid-feedback" id="edit-lastName-input-error"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="edit-firstName-input">名前</label>
+              <input class="form-control" id="edit-firstName-input" placeholder="名前" type="text" required>
+              <div class="invalid-feedback" id="edit-firstName-input-error"></div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label" for="edit-lastNameKana-input">名字(カナ)</label>
+              <input class="form-control" id="edit-lastNameKana-input" placeholder="名字(カナ)" type="text" required>
+              <div class="invalid-feedback" id="edit-lastNameKana-input-error"></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="edit-firstNameKana-input">名前(カナ)</label>
+              <input class="form-control" id="edit-firstNameKana-input" placeholder="名前(カナ)" type="text" required>
+              <div class="invalid-feedback" id="edit-firstNameKana-input-error"></div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-3">
+              <label class="form-label" for="edit-birthday-input">生年月日</label>
+              <input class="form-control" id="edit-birthday-input" placeholder="生年月日" type="text">
+              <div class="invalid-feedback" id="edit-birthday-input-error"></div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label" for="edit-gender-input">性別</label>
+              <select class="form-select" id="edit-gender-input" required>
+                <option value="">未選択</option>
+                <option th:each="gender : ${genderTypeList}" th:value="${gender.value}" th:inline="text">[[${gender.label}]]</option>
+              </select>
+              <div class="invalid-feedback" id="edit-gender-input-error"></div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label" for="edit-blood-input">血液型</label>
+              <select class="form-select" id="edit-blood-input" required>
+                <option value="">未選択</option>
+                <option th:each="blood : ${bloodTypeList}" th:value="${blood.value}" th:inline="text">[[${blood.label}]]</option>
+              </select>
+              <div class="invalid-feedback" id="edit-blood-input-error"></div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label" for="edit-birthplace-input">出身地</label>
+              <select class="form-select" id="edit-birthplace-input" required>
+                <option value="">未選択</option>
+                <option value="0">徳島県</option>
+                <option value="1">香川県</option>
+                <option value="2">愛媛県</option>
+                <option value="3">高知県</option>
+              </select>
+              <div class="invalid-feedback" id="edit-birthplace-input-error"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">キャンセル</button>
+        <button class="btn btn-primary" type="submit" id="edit-button">更新</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 削除確認モーダル -->
+<div aria-hidden="true" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="delete-confirm-modal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">削除確認</h5>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            以下の従業員情報を削除します。
+          </div>
+        </div>
+        <div class="row">
+          <div class="col align-self-center">
+            <input id="delete-id-input" type="hidden">
+            <div class="row mt-3">
+              <div class="col text-end fw-bold">社員番号</div>
+              <div class="col text-start" id="delete-number"></div>
+            </div>
+            <div class="row mt-2">
+              <div class="col text-end fw-bold">名前</div>
+              <div class="col text-start" id="delete-full-name"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">キャンセル</button>
+        <button class="btn btn-primary" type="submit" id="delete-button">
+          <i class="fa-solid fa-trash"></i>削除
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+  /*<![CDATA[*/
+
+  // 各inputのバリデーションチェック
+  $('#add-number-input').on('input', function (event) {
+    validRequiredTextField($('#add-number-input'), $('#add-number-input-error'))
   })
+  $('#add-loginId-input').on('input', function (event) {
+    validRequiredTextField($('#add-loginId-input'), $('#add-loginId-input-error'))
+  })
+  $('#add-lastName-input').on('input', function (event) {
+    validRequiredTextField($('#add-lastName-input'), $('#add-lastName-input-error'))
+  })
+  $('#add-firstName-input').on('input', function (event) {
+    validRequiredTextField($('#add-firstName-input'), $('#add-firstName-input-error'))
+  })
+  $('#add-lastNameKana-input').on('input', function (event) {
+    validRequiredTextField($('#add-lastNameKana-input'), $('#add-lastNameKana-input-error'))
+  })
+  $('#add-firstNameKana-input').on('input', function (event) {
+    validRequiredTextField($('#add-firstNameKana-input'), $('#add-firstNameKana-input-error'))
+  })
+  $('#add-birthday-input').on('input', function (event) {
+    validRequiredDateField($('#add-birthday-input'), $('#add-birthday-input-error'))
+  })
+  $('#add-gender-input').on('change', function (event) {
+    validRequiredSelectField($('#add-gender-input'), $('#add-gender-input-error'))
+  })
+  $('#add-blood-input').on('change', function (event) {
+    validRequiredSelectField($('#add-blood-input'), $('#add-blood-input-error'))
+  })
+  $('#edit-number-input').on('input', function (event) {
+    validRequiredTextField($('#edit-number-input'), $('#edit-number-input-error'))
+  })
+  $('#edit-loginId-input').on('input', function (event) {
+    validRequiredTextField($('#edit-loginId-input'), $('#edit-loginId-input-error'))
+  })
+  $('#edit-lastName-input').on('input', function (event) {
+    validRequiredTextField($('#edit-lastName-input'), $('#edit-lastName-input-error'))
+  })
+  $('#edit-firstName-input').on('input', function (event) {
+    validRequiredTextField($('#edit-firstName-input'), $('#edit-firstName-input-error'))
+  })
+  $('#edit-lastNameKana-input').on('input', function (event) {
+    validRequiredTextField($('#edit-lastNameKana-input'), $('#edit-lastNameKana-input-error'))
+  })
+  $('#edit-firstNameKana-input').on('input', function (event) {
+    validRequiredTextField($('#edit-firstNameKana-input'), $('#edit-firstNameKana-input-error'))
+  })
+  $('#edit-birthday-input').on('input', function (event) {
+    validRequiredDateField($('#edit-birthday-input'), $('#edit-birthday-input-error'))
+  })
+  $('#edit-gender-input').on('change', function (event) {
+    validRequiredSelectField($('#edit-gender-input'), $('#edit-gender-input-error'))
+  })
+  $('#edit-blood-input').on('change', function (event) {
+    validRequiredSelectField($('#edit-blood-input'), $('#edit-blood-input-error'))
+  })
+
+  // 新規登録モーダルを閉じた時の処理
+  $("#add-modal").on("hidden.bs.modal", function () {
+    $('#add-number-input').removeClass('is-invalid')
+    $('#add-number-input-error').text('')
+    $('#add-loginId-input').removeClass('is-invalid')
+    $('#add-loginId-input-error').text('')
+    $('#add-lastName-input').removeClass('is-invalid')
+    $('#add-lastName-input-error').text('')
+    $('#add-firstName-input').removeClass('is-invalid')
+    $('#add-firstName-input-error').text('')
+    $('#add-lastNameKana-input').removeClass('is-invalid')
+    $('#add-lastNameKana-input-error').text('')
+    $('#add-firstNameKana-input').removeClass('is-invalid')
+    $('#add-firstNameKana-input-error').text('')
+    $('#add-birthday-input').removeClass('is-invalid')
+    $('#add-birthday-input-error').text('')
+    $('#add-gender-input').removeClass('is-invalid')
+    $('#add-gender-input-error').text('')
+    $('#add-blood-input').removeClass('is-invalid')
+    $('#add-blood-input-error').text('')
+  });
+
+  // 新規登録モーダルの登録ボタン押下時の処理
+  $('#add-button').on('click', function (event) {
+    // ボタンを非活性にする
+    $('#add-button').prop('disabled', true)
+    // 対象の従業員IDを取得
+    const id = $('#add-id-input').val()
+    // 患者メモ保存リクエストを送信
+    $.ajax({
+      type: 'POST',
+      url: '/api/admin/manage/employees',
+      headers: {
+        'X-XSRF-TOKEN': $('[name=_csrf]')[0].value,
+        'Content-Type': 'application/json;charset=UTF-8'
+      },
+      data: JSON.stringify({
+        number: $('#add-number-input').val(),
+        loginId: $('#add-loginId-input').val(),
+        lastName: $('#add-lastName-input').val(),
+        firstName: $('#add-firstName-input').val(),
+        lastNameKana: $('#add-lastNameKana-input').val(),
+        firstNameKana: $('#add-firstNameKana-input').val(),
+        birthday: $('#add-birthday-input').val(),
+        gender: $('#add-gender-input').val(),
+        blood: $('#add-blood-input').val(),
+        birthplace: $('#add-birthplace-input').val(),
+      }),
+      statusCode: {
+        400: function (res) {
+          if (!!res && !!res.responseJSON && !!res.responseJSON.notValidList) {
+            res.responseJSON.notValidList.forEach(element => {
+              $('#add-' + element.fieldName + '-input').addClass('is-invalid')
+              $('#add-' + element.fieldName + '-input-error').text(element.message)
+            })
+          }
+          // ボタンを活性にする
+          $('#add-button').prop('disabled', false)
+        },
+        401: function () {
+          // 認証情報が消えているためログイン画面へ遷移
+          window.location.href = '/login?timeout'
+        }
+      }
+    }).done(function (res) {
+      // 完了した場合は従業員管理を再表示
+      window.location.href = '/admin/manage/employees'
+    });
+  })
+
+  // 編集モーダル表示時の処理
+  $('#edit-modal').on('show.bs.modal', function (event) {
+    // 押下したボタンからIDを取得
+    let button = $(event.relatedTarget)
+    let id = button.data('edit-id')
+    // 値を取得
+    $.ajax({
+      type: 'GET',
+      url: '/api/admin/manage/employees/' + id,
+      dataType: 'json',
+      statusCode: {
+        401: function () {
+          // 認証情報が消えているためログイン画面へ遷移
+          window.location.href = '/login?timeout'
+        },
+      },
+    }).done(function (res) {
+      if (!!res) {
+        // APIから取得した値を各フィールドへ設定
+        $('#edit-id-input').val(res.id)
+        $('#edit-number-input').val(res.number)
+        $('#edit-loginId-input').val(res.loginId)
+        $('#edit-lastName-input').val(res.lastName)
+        $('#edit-firstName-input').val(res.firstName)
+        $('#edit-lastNameKana-input').val(res.lastNameKana)
+        $('#edit-firstNameKana-input').val(res.firstNameKana)
+        $('#edit-birthday-input').val(res.birthday)
+        $('#edit-gender-input').val(res.genderTypeValue)
+        $('#edit-blood-input').val(res.bloodTypeValue)
+        $('#edit-birthplace-input').val(res.birthplace)
+      }
+    });
+  })
+
+  // 編集モーダルを閉じた時の処理
+  $("#edit-modal").on("hidden.bs.modal", function () {
+    $('#edit-number-input').removeClass('is-invalid')
+    $('#edit-number-input-error').text('')
+    $('#edit-loginId-input').removeClass('is-invalid')
+    $('#edit-loginId-input-error').text('')
+    $('#edit-lastName-input').removeClass('is-invalid')
+    $('#edit-lastName-input-error').text('')
+    $('#edit-firstName-input').removeClass('is-invalid')
+    $('#edit-firstName-input-error').text('')
+    $('#edit-lastNameKana-input').removeClass('is-invalid')
+    $('#edit-lastNameKana-input-error').text('')
+    $('#edit-firstNameKana-input').removeClass('is-invalid')
+    $('#edit-firstNameKana-input-error').text('')
+    $('#edit-birthday-input').removeClass('is-invalid')
+    $('#edit-birthday-input-error').text('')
+    $('#edit-gender-input').removeClass('is-invalid')
+    $('#edit-gender-input-error').text('')
+    $('#edit-blood-input').removeClass('is-invalid')
+    $('#edit-blood-input-error').text('')
+  });
+
+  // 編集モーダルの更新ボタン押下時の処理
+  $('#edit-button').on('click', function (event) {
+    // ボタンを非活性にする
+    $('#edit-button').prop('disabled', true)
+    // 対象の従業員IDを取得
+    const id = $('#edit-id-input').val()
+    // 患者メモ保存リクエストを送信
+    $.ajax({
+      type: 'PUT',
+      url: '/api/admin/manage/employees/' + id,
+      headers: {
+        'X-XSRF-TOKEN': $('[name=_csrf]')[0].value,
+        'Content-Type': 'application/json;charset=UTF-8'
+      },
+      data: JSON.stringify({
+        number: $('#edit-number-input').val(),
+        loginId: $('#edit-loginId-input').val(),
+        lastName: $('#edit-lastName-input').val(),
+        firstName: $('#edit-firstName-input').val(),
+        lastNameKana: $('#edit-lastNameKana-input').val(),
+        firstNameKana: $('#edit-firstNameKana-input').val(),
+        birthday: $('#edit-birthday-input').val(),
+        gender: $('#edit-gender-input').val(),
+        blood: $('#edit-blood-input').val(),
+        birthplace: $('#edit-birthplace-input').val(),
+      }),
+      statusCode: {
+        400: function (res) {
+          if (!!res && !!res.responseJSON && !!res.responseJSON.notValidList) {
+            res.responseJSON.notValidList.forEach(element => {
+              $('#edit-' + element.fieldName + '-input').addClass('is-invalid')
+              $('#edit-' + element.fieldName + '-input-error').text(element.message)
+            })
+          }
+          // ボタンを活性にする
+          $('#edit-button').prop('disabled', false)
+        },
+        401: function () {
+          // 認証情報が消えているためログイン画面へ遷移
+          window.location.href = '/login?timeout'
+        }
+      }
+    }).done(function (res) {
+      // 完了した場合は従業員管理を再表示
+      window.location.href = '/admin/manage/employees'
+    });
+  })
+
+  // 削除モーダル表示時の処理
+  $('#delete-confirm-modal').on('show.bs.modal', function (event) {
+    // 値を取得
+    let button = $(event.relatedTarget)
+    let id = button.data('delete-id')
+    let number = button.data('delete-number')
+    let fullName = button.data('delete-full-name')
+    // モーダル側に値を設定
+    $('#delete-id-input').val(id)
+    $('#delete-number').text(number)
+    $('#delete-full-name').text(fullName)
+  })
+
+  // 削除モーダルの削除ボタン押下時の処理
+  $('#delete-button').on('click', function (event) {
+    // ボタンを非活性にする
+    $('#delete-button').prop('disabled', true)
+    // 対象の従業員IDを取得
+    const id = $('#delete-id-input').val()
+    // 患者メモ保存リクエストを送信
+    $.ajax({
+      type: 'DELETE',
+      url: '/api/admin/manage/employees/' + id,
+      headers: {
+        'X-XSRF-TOKEN': $('[name=_csrf]')[0].value,
+        'Content-Type': 'application/json;charset=UTF-8'
+      },
+      statusCode: {
+        400: function (res) {
+          console.log(res)
+        },
+        401: function () {
+          // 認証情報が消えているためログイン画面へ遷移
+          window.location.href = '/login?timeout'
+        }
+      }
+    }).done(function () {
+      // 完了した場合は従業員管理を再表示
+      window.location.href = '/admin/manage/employees'
+    });
+  })
+
+  /*]]>*/
 </script>
 </body>
 </html>

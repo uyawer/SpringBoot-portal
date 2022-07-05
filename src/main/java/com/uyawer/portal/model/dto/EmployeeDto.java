@@ -1,6 +1,15 @@
+/*!
+ * Copyright © 2022 uyawer. All rights Reserved.
+ */
+
 package com.uyawer.portal.model.dto;
 
+import com.uyawer.portal.constants.type.BloodType;
+import com.uyawer.portal.constants.type.GenderType;
+import com.uyawer.portal.helper.utils.DateUtils;
 import com.uyawer.portal.model.entity.EmployeeEntity;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
 
@@ -18,16 +27,16 @@ public class EmployeeDto {
     /** ログインID */
     private String loginId;
 
-    /** 性 */
+    /** 名字 */
     private String lastName;
 
-    /** 名 */
+    /** 名前 */
     private String firstName;
 
-    /** 性カナ */
+    /** 名字カナ */
     private String lastNameKana;
 
-    /** 名カナ */
+    /** 名前カナ */
     private String firstNameKana;
 
     /** フルネーム */
@@ -51,11 +60,14 @@ public class EmployeeDto {
     /** 生年月日 */
     private LocalDate birthday;
 
+    /** 年齢 */
+    private Integer age;
+
     /** 性別 */
-    private Integer sex;
+    private GenderType genderType;
 
     /** 血液型 */
-    private Integer blood;
+    private BloodType bloodType;
 
     /** 出身地 */
     private String birthplace;
@@ -81,10 +93,46 @@ public class EmployeeDto {
         this.departmentId = entity.getDepartmentId();
         this.roleId = entity.getRoleId();
         this.birthday = entity.getBirthday();
-        this.sex = entity.getSex();
-        this.blood = entity.getBlood();
+        this.age = DateUtils.calcAge(entity.getBirthday());
+        this.genderType = GenderType.valueOf(entity.getGender());
+        this.bloodType = BloodType.valueOf(entity.getBlood());
         this.birthplace = entity.getBirthplace();
         this.biography = entity.getBiography();
         this.retirementFlg = entity.isRetirementFlg();
+    }
+
+    public String getAgeLabel() {
+        if (this.age == null) {
+            return StringUtils.EMPTY;
+        }
+        return String.format("%d歳", age);
+    }
+
+    public String getGenderTypeLabel() {
+        if (this.genderType == null) {
+            return StringUtils.EMPTY;
+        }
+        return this.genderType.getLabel();
+    }
+
+    public Integer getGenderTypeValue() {
+        if (this.genderType == null) {
+            return null;
+        }
+        return this.genderType.getValue();
+    }
+
+    public String getBloodTypeLabel() {
+        if (this.bloodType == null) {
+            return StringUtils.EMPTY;
+        }
+        return this.bloodType.getLabel();
+    }
+
+    public Integer getBloodTypeValue() {
+        if (this.bloodType == null) {
+            return null;
+        }
+        return this.bloodType.getValue();
     }
 }

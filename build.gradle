@@ -12,7 +12,6 @@ buildscript {
   }
   repositories {
     mavenCentral()
-    jcenter()
   }
   dependencies {
     classpath "com.avast.gradle:gradle-docker-compose-plugin:${dockerComposePluginVersion}"
@@ -57,8 +56,9 @@ dependencies {
   implementation "org.springframework.boot:spring-boot-starter-security:${springBoot}"
   implementation "org.springframework.boot:spring-boot-starter-thymeleaf:${springBoot}"
   implementation "org.springframework.boot:spring-boot-starter-validation:${springBoot}"
+  implementation "org.springframework.boot:spring-boot-starter-actuator:${springBoot}"
   testImplementation "org.springframework.boot:spring-boot-starter-test:${springBoot}"
-  testImplementation "org.springframework.security:spring-security-test"
+  developmentOnly "org.springframework.boot:spring-boot-devtools:${springBoot}"
 
   implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5"
 
@@ -78,6 +78,7 @@ dependencies {
 tasks.named("test") {
   useJUnitPlatform()
   checkstyleMain
+  spotbugsMain
 }
 
 flyway {

@@ -1,22 +1,40 @@
+/*!
+ * Copyright © 2022 uyawer. All rights Reserved.
+ */
+
 package com.uyawer.portal.model.entity;
+
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@DynamicInsert
 @Entity
 @Table(name = "employees")
 public class EmployeeEntity {
 
     /** ID */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /** 社員番号 */
@@ -26,19 +44,19 @@ public class EmployeeEntity {
     @Column(name = "login_id")
     private String loginId;
 
-    /** 性 */
+    /** 名字 */
     @Column(name = "last_name")
     private String lastName;
 
-    /** 名 */
+    /** 名前 */
     @Column(name = "first_name")
     private String firstName;
 
-    /** 性カナ */
+    /** 名字カナ */
     @Column(name = "last_name_kana")
     private String lastNameKana;
 
-    /** 名カナ */
+    /** 名前カナ */
     @Column(name = "first_name_kana")
     private String firstNameKana;
 
@@ -64,7 +82,7 @@ public class EmployeeEntity {
     private LocalDate birthday;
 
     /** 性別 */
-    private Integer sex;
+    private Integer gender;
 
     /** 血液型 */
     private Integer blood;
@@ -81,10 +99,12 @@ public class EmployeeEntity {
 
     /** 作成日時 */
     @Column(name = "created_at")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private LocalDateTime createdAt;
 
     /** 更新日時 */
     @Column(name = "updated_at")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private LocalDateTime updatedAt;
 
     /** 削除フラグ */
@@ -96,5 +116,22 @@ public class EmployeeEntity {
      */
     public void enableDeleteFlg() {
         this.deleteFlg = true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        EmployeeEntity employee = (EmployeeEntity) o;
+        return id != null && Objects.equals(id, employee.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

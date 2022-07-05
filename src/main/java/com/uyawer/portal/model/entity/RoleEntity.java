@@ -1,15 +1,28 @@
+/*!
+ * Copyright © 2022 uyawer. All rights Reserved.
+ */
+
 package com.uyawer.portal.model.entity;
 
+import org.hibernate.Hibernate;
+
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "roles")
 public class RoleEntity {
@@ -41,4 +54,21 @@ public class RoleEntity {
     /** 削除フラグ */
     @Column(name = "delete_flg")
     private boolean deleteFlg;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        RoleEntity that = (RoleEntity) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

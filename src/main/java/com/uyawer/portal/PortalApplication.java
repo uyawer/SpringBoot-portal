@@ -1,3 +1,7 @@
+/*!
+ * Copyright © 2022 uyawer. All rights Reserved.
+ */
+
 package com.uyawer.portal;
 
 import org.springframework.boot.SpringApplication;

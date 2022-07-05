@@ -1,7 +1,11 @@
+/*!
+ * Copyright © 2022 uyawer. All rights Reserved.
+ */
+
 package com.uyawer.portal.security;
 
 import com.uyawer.portal.constants.type.RoleType;
-import com.uyawer.portal.service.LoginUserDetailsService;
+import com.uyawer.portal.service.impl.LoginUserDetailsServiceImpl;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +24,9 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final LoginUserDetailsService userDetailsService;
+    private final LoginUserDetailsServiceImpl userDetailsService;
 
-    public WebSecurityConfiguration(LoginUserDetailsService service) {
+    public WebSecurityConfiguration(LoginUserDetailsServiceImpl service) {
         this.userDetailsService = service;
     }
 
@@ -45,8 +49,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
             .expressionHandler(createSecurityExpressionHandler())
             .antMatchers("/terms").permitAll() // 利用規約画面はログイン不要
-            .antMatchers("/manager/**").hasRole(RoleType.MANAGER.name()) // manager以下はマネージャー以上
-            .antMatchers("/admin/**").hasRole(RoleType.ADMIN.name()) // admin以下は管理者のみ
+            .antMatchers("/manager/**", "/api/manager/**").hasRole(RoleType.MANAGER.name()) // manager以下はマネージャー以上
+            .antMatchers("/admin/**", "/api/admin/**").hasRole(RoleType.ADMIN.name()) // admin以下は管理者のみ
             .anyRequest().authenticated() // 指定したURL以外は認証が必要
             .and()
             // ログインの設定

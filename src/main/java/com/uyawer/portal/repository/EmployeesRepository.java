@@ -1,3 +1,7 @@
+/*!
+ * Copyright © 2022 uyawer. All rights Reserved.
+ */
+
 package com.uyawer.portal.repository;
 
 import com.uyawer.portal.model.entity.EmployeeEntity;
@@ -11,7 +15,13 @@ import java.util.Optional;
 @Repository
 public interface EmployeesRepository extends JpaRepository<EmployeeEntity, Long> {
 
-    Optional<EmployeeEntity> findByLoginId(String loginId);
+    Optional<EmployeeEntity> findByIdAndDeleteFlgFalse(
+        Long id
+    );
+
+    Optional<EmployeeEntity> findByLoginId(
+        String loginId
+    );
 
     List<EmployeeEntity> findByDeleteFlgFalseOrderById();
 }

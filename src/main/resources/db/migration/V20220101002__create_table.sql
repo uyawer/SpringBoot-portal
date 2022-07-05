@@ -1,5 +1,5 @@
 -- Project Name : portal
--- Date/Time    : 2022/05/09 15:53:06
+-- Date/Time    : 2022/07/05 16:55:35
 -- Author       : uyawer
 -- RDBMS Type   : PostgreSQL
 -- Application  : A5:SQL Mk-2
@@ -84,13 +84,13 @@ CREATE TABLE employees (
   , first_name character varying NOT NULL
   , last_name_kana character varying NOT NULL
   , first_name_kana character varying NOT NULL
-  , password character varying(60) NOT NULL
+  , password character varying(60)
   , password_reset_flg BOOLEAN DEFAULT false NOT NULL
   , position character varying
   , department_id bigint REFERENCES departments(id)
   , role_id bigint NOT NULL REFERENCES roles(id)
   , birthday date
-  , sex integer
+  , gender integer
   , blood integer
   , birthplace character varying
   , biography character varying
@@ -152,17 +152,17 @@ COMMENT ON TABLE employees IS '従業員';
 COMMENT ON COLUMN employees.id IS 'ID';
 COMMENT ON COLUMN employees.number IS '社員番号';
 COMMENT ON COLUMN employees.login_id IS 'ログインID';
-COMMENT ON COLUMN employees.last_name IS '性';
-COMMENT ON COLUMN employees.first_name IS '名';
-COMMENT ON COLUMN employees.last_name_kana IS '性カナ';
-COMMENT ON COLUMN employees.first_name_kana IS '名カナ';
+COMMENT ON COLUMN employees.last_name IS '名字';
+COMMENT ON COLUMN employees.first_name IS '名前';
+COMMENT ON COLUMN employees.last_name_kana IS '名字カナ';
+COMMENT ON COLUMN employees.first_name_kana IS '名前カナ';
 COMMENT ON COLUMN employees.password IS 'パスワード';
 COMMENT ON COLUMN employees.password_reset_flg IS 'パスワードリセットフラグ';
 COMMENT ON COLUMN employees.position IS '役職';
 COMMENT ON COLUMN employees.department_id IS '部署ID';
 COMMENT ON COLUMN employees.role_id IS '権限ID';
 COMMENT ON COLUMN employees.birthday IS '生年月日';
-COMMENT ON COLUMN employees.sex IS '性別';
+COMMENT ON COLUMN employees.gender IS '性別';
 COMMENT ON COLUMN employees.blood IS '血液型';
 COMMENT ON COLUMN employees.birthplace IS '出身地';
 COMMENT ON COLUMN employees.biography IS '自己紹介';

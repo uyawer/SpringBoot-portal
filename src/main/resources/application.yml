@@ -7,16 +7,22 @@ spring.profiles.group:
   local:
     - local
 
+server:
+  port: 8080
+
 # ----------------------------------------
 # logging
 # ----------------------------------------
 logging:
   level:
-    root: INFO
-    web: INFO
-    org.hibernate:
-      SQL: DEBUG
-      type.descriptor.sql.BasicBinder: TRACE
+    org:
+      springframework: INFO
+      springframework.boot: INFO
+      springframework.boot.devtools: INFO
+      springframework.jdbc: INFO
+    com.uyawer:
+      portal: INFO
+      portal.repository: INFO
 
 # ----------------------------------------
 # DataSource
@@ -26,7 +32,6 @@ spring.datasource:
   url: jdbc:postgresql://{hostname}:{port}/{schema]
   username:
   password:
-  initialization-mode: always
 
 # ----------------------------------------
 # JPA

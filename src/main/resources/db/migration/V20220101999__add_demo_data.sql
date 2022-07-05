@@ -3,6 +3,7 @@ INSERT INTO departments(id, name, name_kana, parent_department_id, manager_id, s
   (2, '幽霊部', 'ユウレイブ', null, null, null),
   (3, 'Java', 'ジャヴァ', 1, 7, null)
 ;
+select setval ('departments_id_seq', 10);
 
 INSERT INTO roles(id, general_flg, manager_flg, admin_flg) VALUES
   (1, true, true, true),
@@ -14,6 +15,7 @@ INSERT INTO roles(id, general_flg, manager_flg, admin_flg) VALUES
   (7, true, true, false),
   (8, true, false, false)
 ;
+select setval ('roles_id_seq', 10);
 
 -- passwordの平文は"password"
 INSERT INTO employees(id, number, login_id, last_name, first_name, last_name_kana, first_name_kana, password, position, department_id, role_id, birthday, retirement_flg) VALUES
@@ -26,3 +28,4 @@ INSERT INTO employees(id, number, login_id, last_name, first_name, last_name_kan
   (7, '0210104', 'user104', '山田', '士郎', 'ヤマダ', 'シロウ', '$2a$10$BVugqASEdKPIIiOOPQEkXONl9N7kAyKLEpMd8mjPpMUKK2zRgxcfq', null, 2, 7, null, false),
   (8, '0210105', 'user105', '山田', '吾郎', 'ヤマダ', 'ゴロウ', '$2a$10$BVugqASEdKPIIiOOPQEkXONl9N7kAyKLEpMd8mjPpMUKK2zRgxcfq', null, null, 8, '1986/3/31', false)
 ;
+select setval ('employees_id_seq', 10);

@@ -60,5 +60,11 @@ hs_err_pid*
 ### Properties Files ###
 application-local.yml
 
-### Customize ###
+### docker ###
 docker/data/
+
+### bootstrap ###
+**/bootstrap*.css
+**/bootstrap*.css.map
+**/bootstrap*.js
+**/bootstrap*.js.map

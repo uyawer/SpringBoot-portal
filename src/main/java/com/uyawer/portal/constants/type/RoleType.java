@@ -1,3 +1,7 @@
+/*!
+ * Copyright © 2022 uyawer. All rights Reserved.
+ */
+
 package com.uyawer.portal.constants.type;
 
 /** 権限区分 */

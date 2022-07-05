@@ -1,5 +1,21 @@
+# ----------------------------------------
+# logging
+# ----------------------------------------
+logging:
+  level:
+    org:
+      springframework: DEBUG
+      springframework.boot: DEBUG
+      springframework.boot.devtools: DEBUG
+      springframework.jdbc: DEBUG
+    com.uyawer:
+      portal: DEBUG
+      portal.repository: DEBUG
+
+# ----------------------------------------
 # DataSource
+# ----------------------------------------
 spring.datasource:
-  url: jdbc:postgresql://localhost:5432/portal
+  url: jdbc:postgresql://localhost:15432/portal
   username: portaluser
   password: portaluser0428

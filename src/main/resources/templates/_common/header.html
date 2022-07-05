@@ -13,10 +13,10 @@
     type="button">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="d-flex justify-content-start flex-wrap flex-md-nowrap align-items-center w-100">
+  <div class="d-flex justify-content-start flex-wrap flex-md-nowrap align-items-center my-2 w-100">
     <div th:replace="${header}">header</div>
   </div>
-  <div class="navbar-nav">
+  <div class="navbar-nav d-none d-md-block">
     <div class="nav-item text-nowrap">
       <form method="post" name="logout" th:action="@{/logout}">
         <a class="nav-link px-3" href="javascript:logout.submit()">

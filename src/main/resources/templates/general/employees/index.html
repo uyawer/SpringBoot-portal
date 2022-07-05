@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:replace="~{_common/layout::layout(~{::header/content()}, ~{::body/content()}, '従業員一覧')}" xmlns:th="http://www.thymeleaf.org">
+<header>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li aria-current="page" class="breadcrumb-item active">従業員一覧</li>
+    </ol>
+  </nav>
+</header>
+<body>
+<div>
+  <div class="row g-4">
+    <div class="col" style="max-width: 14rem; min-width: 14rem" th:each="employee : ${employeeList}" th:object="${employee}">
+      <div class="card h-100 shadow">
+        <div class="card-body">
+          <div th:text="*{number}"></div>
+          <div th:text="*{fullName}"></div>
+          <div th:text="*{loginId + '@example.com'}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,3 +1,7 @@
+/*!
+ * Copyright © 2022 uyawer. All rights Reserved.
+ */
+
 package com.uyawer.portal.model.dto;
 
 import com.uyawer.portal.model.entity.EmployeeEntity;
@@ -19,16 +23,16 @@ public class LoginUserDto extends User {
     /** 社員番号 */
     private final String number;
 
-    /** 性 */
+    /** 名字 */
     private final String lastName;
 
-    /** 名 */
+    /** 名前 */
     private final String firstName;
 
-    /** 性カナ */
+    /** 名字カナ */
     private final String lastNameKana;
 
-    /** 名カナ */
+    /** 名前カナ */
     private final String firstNameKana;
 
     /** パスワードリセットフラグ */
@@ -47,7 +51,7 @@ public class LoginUserDto extends User {
     private final LocalDate birthday;
 
     /** 性別 */
-    private final Integer sex;
+    private final Integer gender;
 
     /** 血液型 */
     private final Integer blood;
@@ -77,7 +81,7 @@ public class LoginUserDto extends User {
         this.departmentId = entity.getDepartmentId();
         this.roleId = entity.getRoleId();
         this.birthday = entity.getBirthday();
-        this.sex = entity.getSex();
+        this.gender = entity.getGender();
         this.blood = entity.getBlood();
         this.birthplace = entity.getBirthplace();
         this.biography = entity.getBiography();

@@ -12,11 +12,14 @@ spring.profiles.group:
 # ----------------------------------------
 logging:
   level:
-    root: INFO
-    web: INFO
-    org.hibernate:
-      SQL: DEBUG
-      type.descriptor.sql.BasicBinder: TRACE
+    org:
+      springframework: DEBUG
+      springframework.boot: INFO
+      springframework.boot.devtools: DEBUG
+      springframework.jdbc: INFO
+    com.uyawer:
+      portal: DEBUG
+      portal.repository: TRACE
 
 # ----------------------------------------
 # DataSource
@@ -26,7 +29,6 @@ spring.datasource:
   url: jdbc:postgresql://localhost:5432/portal
   username: portaluser
   password: portaluser0428
-  initialization-mode: always
 
 # ----------------------------------------
 # JPA
@@ -49,3 +51,11 @@ spring.web:
         content:
           enabled: true
           paths: /**
+
+# ----------------------------------------
+# MVC
+# ----------------------------------------
+spring.mvc:
+  hiddenmethod:
+    filter:
+      enabled: true # formでput/deleteを使うための設定
