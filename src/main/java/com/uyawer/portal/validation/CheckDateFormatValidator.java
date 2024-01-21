@@ -10,8 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class CheckDateFormatValidator implements ConstraintValidator<CheckDateFormat, String> {
 

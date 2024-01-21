@@ -12,8 +12,8 @@ import com.uyawer.portal.validation.CheckDateFormatValidator;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 @Target({FIELD})
 @Retention(RUNTIME)
