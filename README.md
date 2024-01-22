@@ -1,4 +1,4 @@
-# SpringBoot-v2.7.0-portal
+# SpringBoot-portal
 
 学習用にSpringBootとThymeleafで作るPortal疑似サイト
 
